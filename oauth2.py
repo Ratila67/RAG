@@ -7,6 +7,7 @@ load_dotenv()
 
 client_id = os.getenv("client_id") or os.getenv("CLIENT_ID")
 client_secret = os.getenv("client_secret") or os.getenv("CLIENT_SECRET")
+piste_env = (os.getenv("PISTE_ENV") or "prod").lower()
 
 
 def get_legifrance_token(client_id: str, client_secret: str) -> str:
@@ -14,10 +15,14 @@ def get_legifrance_token(client_id: str, client_secret: str) -> str:
     if not client_id or not client_secret:
         raise ValueError("Variables client_id/client_secret manquantes.")
 
-    token_urls = [
-        "https://oauth.piste.gouv.fr/api/oauth/token",  # production
-        "https://sandbox-oauth.piste.gouv.fr/api/oauth/token",  # sandbox
-    ]
+    oauth_url_prod = "https://oauth.piste.gouv.fr/api/oauth/token"
+    oauth_url_sandbox = "https://sandbox-oauth.piste.gouv.fr/api/oauth/token"
+    if piste_env == "prod":
+        token_urls = [oauth_url_prod]
+    elif piste_env == "sandbox":
+        token_urls = [oauth_url_sandbox]
+    else:
+        token_urls = [oauth_url_prod, oauth_url_sandbox]
     errors = []
 
     for url in token_urls:
