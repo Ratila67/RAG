@@ -6,3 +6,4 @@ python-dotenv
 urllib3<2
 beautifulsoup4 #nettoyage html
 tqdm
+streamlit

@@ -118,6 +118,17 @@ Sources:
   - art. L3121-28 (dist=0.518)
 ```
 
+### 3. Dashboard Streamlit (chat ultra minimal)
+
+```bash
+streamlit run streamlit_app.py
+```
+
+Fonctionnalités :
+- Chat avec historique (style minimal)
+- Réglage `top_k` et affichage des sources (sidebar)
+- Affichage des extraits retrouvés (expander “Sources”)
+
 
 ## Dépannage
 
